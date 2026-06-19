@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Instituto Belém — Seja Membro</title>
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-wrap"><img src="assets/logo.png" alt="Instituto Belém" class="logo"></div>
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Início</a>
+      <a href="principal.html" class="nav-link">Principal</a>
+      <a href="acoes.html" class="nav-link">Ações</a>
+      <a href="seja-membro.html" class="nav-link active">Seja Membro</a>
+      <a href="area-restrita.html" class="nav-link">Área Restrita</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Associe-se ao Instituto Belém</h1>
+
+    <div id="voluntarioSection">
+      <form id="formVoluntario" enctype="multipart/form-data">
+        <fieldset>
+          <legend>1. Identificação Básica</legend>
+          <div class="form-grid">
+            <label>Nome completo<br><input type="text" name="vol_nome" required></label>
+            <label>E-mail<br><input type="email" name="vol_email" required></label>
+            <label>Data de nascimento<br><input type="date" name="vol_data_nasc" required></label>
+            <label>CPF<br><input type="text" name="vol_cpf" placeholder="000.000.000-00" required></label>
+            <label>RG<br><input type="text" name="vol_rg" required></label>
+            <label>Telefone Principal<br><input type="tel" name="vol_tel_principal" required></label>
+            <label>Telefone Alternativo<br><input type="tel" name="vol_tel_alternativo"></label>
+            <label>WhatsApp<br><input type="tel" name="vol_whatsapp"></label>
+            <label>Foto (opcional)<br><input type="file" name="vol_foto" accept="image/*"></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>2. Endereço</legend>
+          <div class="form-grid">
+            <label>CEP<br><input type="text" id="vol_cep" name="vol_cep" placeholder="00000-000" required></label>
+            <label>Rua<br><input type="text" id="vol_rua" name="vol_rua" required></label>
+            <label>Número<br><input type="text" name="vol_numero" required></label>
+            <label>Bairro<br><input type="text" id="vol_bairro" name="vol_bairro" required></label>
+            <label>Cidade<br><input type="text" id="vol_cidade" name="vol_cidade" required></label>
+            <label>Estado<br><input type="text" id="vol_estado" name="vol_estado" required></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>3. Perfil no Instituto</legend>
+          <div class="form-grid">
+            <label>Tipo de membro<br>
+              <select name="tipo_membro" required>
+                <option value="voluntario">Voluntário</option>
+                <option value="funcionario">Funcionário</option>
+                <option value="coordenador">Coordenador</option>
+                <option value="parceiro">Parceiro</option>
+              </select>
+            </label>
+          </div>
+          <div class="checkbox-group">
+            <p><strong>Área de atuação:</strong></p>
+            <label><input type="checkbox" name="area" value="alimentos"> Distribuição de alimentos</label><br>
+            <label><input type="checkbox" name="area" value="social"> Atendimento social</label><br>
+            <label><input type="checkbox" name="area" value="admin"> Administrativo</label><br>
+            <label><input type="checkbox" name="area" value="logistica"> Logística</label><br>
+            <label><input type="checkbox" name="area" value="saude_edu"> Saúde / Educação</label><br>
+            <label>Outro: <input type="text" name="area_outro"></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>4. Disponibilidade (ESSENCIAL)</legend>
+          <div class="form-grid">
+            <label>Dias da semana disponíveis<br><input type="text" name="dias_disponiveis" placeholder="Ex: Seg, Qua, Sex"></label>
+            <label>Horários disponíveis<br><input type="text" name="horarios_disponiveis" placeholder="Ex: 08:00 às 12:00"></label>
+          </div>
+          <div class="checkbox-group">
+            <p><strong>Frequência:</strong></p>
+            <label><input type="radio" name="frequencia_vol" value="eventual"> Eventual</label>
+            <label><input type="radio" name="frequencia_vol" value="semanal"> Semanal</label>
+            <label><input type="radio" name="frequencia_vol" value="fixo"> Fixo</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>5. Habilidades e Competências</legend>
+          <label>Formação (se houver)<br><input type="text" name="formacao"></label>
+          <label>Cursos relevantes<br><textarea name="cursos"></textarea></label>
+          <label>Experiência anterior<br><textarea name="experiencia"></textarea></label>
+          <label>Habilidades (direção, cozinha, tecnologia...)<br><input type="text" name="habilidades"></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>6. Responsabilidades e Permissões</legend>
+          <div class="radio-group-vertical">
+            <p>Pode acessar dados de beneficiários?</p>
+            <label><input type="radio" name="perm_dados" value="sim"> Sim</label>
+            <label><input type="radio" name="perm_dados" value="nao"> Não</label>
+            
+            <p style="margin-top:10px;">Pode aprovar ajuda?</p>
+            <label><input type="radio" name="perm_ajuda" value="sim"> Sim</label>
+            <label><input type="radio" name="perm_ajuda" value="nao"> Não</label>
+            
+            <p style="margin-top:10px;">Pode gerenciar outros membros?</p>
+            <label><input type="radio" name="perm_gerencia" value="sim"> Sim</label>
+            <label><input type="radio" name="perm_gerencia" value="nao"> Não</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>7. Histórico e Atuação</legend>
+          <div class="form-grid">
+            <label>Data de entrada<br><input type="date" name="data_entrada"></label>
+            <label>Projetos que participa<br><input type="text" name="projetos"></label>
+          </div>
+          <label>Participações anteriores<br><textarea name="part_anteriores"></textarea></label>
+          <label>Avaliação interna (opcional)<br><input type="text" name="avaliacao"></label>
+        </fieldset>
+
+        <fieldset>
+          <legend>8. Documentação</legend>
+          <div class="form-grid">
+            <label>CNH (logística)<br><input type="file" name="doc_cnh"></label>
+            <label>Certificados<br><input type="file" name="doc_certificados" multiple></label>
+            <label>Antecedentes Criminais<br><input type="file" name="doc_antecedentes"></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>9. Termos e Responsabilidade</legend>
+          <div class="checkbox-group">
+            <label><input type="checkbox" name="termo_vol" required> Termo de voluntariado</label><br>
+            <label><input type="checkbox" name="codigo_conduta" required> Código de conduta</label><br>
+            <label><input type="checkbox" name="confidencialidade" required> Termo de confidencialidade</label><br>
+            <label><input type="checkbox" name="uso_imagem"> Autorização de uso de imagem</label>
+          </div>
+          <p style="font-size: 0.9rem; color: #666; margin-top: 10px;">
+            <em>"Comprometo-me a respeitar a confidencialidade das informações dos assistidos."</em>
+          </p>
+        </fieldset>
+
+        <button type="submit" class="btn-enviar">Enviar inscrição de Voluntário</button>
+      </form>
+      <div id="voluntarioStatus" class="status"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer"><p>© Instituto Belém - CNPJ 60.690.343/0001-57</p></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>

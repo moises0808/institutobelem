@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Instituto Belém — Área Restrita</title>
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-wrap"><img src="assets/logo.png" alt="Instituto Belém" class="logo"></div>
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Início</a>
+      <a href="principal.html" class="nav-link">Principal</a>
+      <a href="acoes.html" class="nav-link">Ações</a>
+      <a href="seja-membro.html" class="nav-link">Seja Membro</a>
+      <a href="area-restrita.html" class="nav-link active">Área Restrita</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Acesso Restrito</h1>
+    <form id="loginForm" class="login-form">
+      <label>E-mail<br><input type="email" id="email" required placeholder="Ex: adm@institutobelem.org.br"></label><br><br>
+      <label>Senha<br><input type="password" id="senha" required></label><br><br>
+      <button type="submit" class="btn-enviar">Entrar</button>
+    </form>
+    <div id="loginStatus" class="status"></div>
+  </main>
+
+  <footer class="site-footer"><p>© Instituto Belém - CNPJ 60.690.343/0001-57</p></footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+</body>
+</html>
