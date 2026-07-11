@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Instituto Belém — Painel Restrito</title>
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-wrap"><img src="assets/logo.png" alt="Instituto Belém" class="logo"></div>
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Início</a>
+      <a href="principal.html" class="nav-link">Principal</a>
+      <a href="acoes.html" class="nav-link">Ações</a>
+      <a href="seja-membro.html" class="nav-link">Seja Membro</a>
+      <a href="area-restrita.html" class="nav-link active">Área Restrita</a>
+    </nav>
+  </header>
+
+  <main class="container restricted-dashboard" data-restricted-dashboard>
+    <div class="dashboard-hero">
+      <p class="eyebrow">Acesso privado</p>
+      <h1>Painel Restrito</h1>
+      <p>Área interna para acompanhamento e gestão das inscrições do Instituto Belém.</p>
+    </div>
+
+    <section class="dashboard-grid">
+      <article class="dashboard-card">
+        <h2>Cadastros recentes</h2>
+        <p>Use este espaço para visualizar e acompanhar os registros recebidos no formulário.</p>
+      </article>
+      <article class="dashboard-card">
+        <h2>Ações rápidas</h2>
+        <p>Revisar inscrições, conferir contatos e acompanhar a atualização da base.</p>
+      </article>
+      <article class="dashboard-card">
+        <h2>Segurança</h2>
+        <p>O acesso permanece ativo enquanto esta sessão estiver aberta no navegador.</p>
+      </article>
+    </section>
+
+    <div class="dashboard-actions">
+      <a class="btn-enviar" href="lista-membros.html">Ver lista de membros</a>
+      <a class="btn-enviar" href="lista-beneficiarios.html">Ver lista de beneficiários</a>
+      <a class="btn-enviar" href="beneficiario.html">Cadastrar beneficiário</a>
+      <button class="btn-enviar btn-secondary" id="logoutRestrito" type="button">Sair</button>
+    </div>
+  </main>
+
+  <footer class="site-footer"><p>© Instituto Belém - CNPJ 60.690.343/0001-57</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>

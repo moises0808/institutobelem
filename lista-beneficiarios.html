@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Instituto Belém — Lista de Beneficiários</title>
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-wrap"><img src="assets/logo.png" alt="Instituto Belém" class="logo"></div>
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Início</a>
+      <a href="principal.html" class="nav-link">Principal</a>
+      <a href="acoes.html" class="nav-link">Ações</a>
+      <a href="seja-membro.html" class="nav-link">Seja Membro</a>
+      <a href="area-restrita.html" class="nav-link active">Área Restrita</a>
+    </nav>
+  </header>
+
+  <main class="container restricted-dashboard" data-beneficiarios-page>
+    <div class="dashboard-hero">
+      <p class="eyebrow">Painel interno</p>
+      <h1>Lista de Beneficiários</h1>
+      <p>Visualização dos cadastros recebidos pelo formulário de beneficiários.</p>
+    </div>
+
+    <div class="dashboard-actions">
+      <a class="btn-enviar" href="painel-restrito.html">Voltar ao painel</a>
+      <a class="btn-enviar" href="beneficiario.html">Cadastrar beneficiário</a>
+      <button class="btn-enviar btn-secondary" id="btnAtualizarBeneficiarios" type="button">Atualizar lista</button>
+      <button class="btn-enviar btn-secondary" id="logoutRestrito" type="button">Sair</button>
+    </div>
+
+    <div id="beneficiariosStatus" class="status"></div>
+    <div id="beneficiariosCount" class="members-count"></div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Foto</th>
+            <th>Nome</th>
+            <th>Telefone</th>
+            <th>CPF</th>
+            <th>Cidade/UF</th>
+            <th>Necessidade</th>
+            <th style="max-width:140px;">E-mail</th>
+            <th>Data de cadastro</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="beneficiariosTableBody">
+          <tr><td colspan="9">Carregando beneficiários...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Modal de edição -->
+    <section id="beneficiarioEditModal" class="member-modal" hidden aria-hidden="true">
+      <div class="member-modal-overlay" data-close-ben-modal></div>
+      <div class="member-modal-content" role="dialog" aria-modal="true" aria-labelledby="editBeneficiarioTitle">
+        <div class="member-modal-header">
+          <h2 id="editBeneficiarioTitle">Editar Beneficiário</h2>
+          <button type="button" class="modal-close" id="closeBeneficiarioModal" aria-label="Fechar">×</button>
+        </div>
+        <form id="beneficiarioEditForm" class="member-edit-form" novalidate>
+          <input type="hidden" name="id" id="edit_ben_id">
+          <div class="form-grid">
+            <label>Nome completo<br><input type="text" name="ben_nome" id="edit_ben_nome" required></label>
+            <label>E-mail<br><input type="email" name="ben_email" id="edit_ben_email"></label>
+            <label>Data de nascimento<br><input type="date" name="ben_data_nasc" id="edit_ben_data_nasc"></label>
+            <label>CPF<br><input type="text" name="ben_cpf" id="edit_ben_cpf"></label>
+            <label>Telefone<br><input type="tel" name="ben_telefone" id="edit_ben_telefone"></label>
+            <label>Foto (upload)<br>
+              <input type="file" name="ben_foto_file" id="edit_ben_foto_file" accept="image/*">
+              <img id="edit_ben_foto_preview" src="" alt="Prévia" style="display:none; max-width:80px; max-height:80px; border-radius:4px; margin-top:4px; object-fit:cover; border:1px solid #ccc;">
+            </label>
+            <label>Foto atual<br><input type="text" id="edit_ben_foto_atual" readonly></label>
+            <input type="hidden" name="ben_foto_nome" id="edit_ben_foto_nome">
+            <input type="hidden" name="ben_foto_url" id="edit_ben_foto_url">
+            <label>CEP<br><input type="text" name="ben_cep" id="edit_ben_cep"></label>
+            <label>Rua<br><input type="text" name="ben_rua" id="edit_ben_rua"></label>
+            <label>Número<br><input type="text" name="ben_numero" id="edit_ben_numero"></label>
+            <label>Bairro<br><input type="text" name="ben_bairro" id="edit_ben_bairro"></label>
+            <label>Cidade<br><input type="text" name="ben_cidade" id="edit_ben_cidade"></label>
+            <label>Estado<br><input type="text" name="ben_estado" id="edit_ben_estado"></label>
+            <label style="grid-column: 1 / -1">Necessidade<br><textarea name="necessidade" id="edit_ben_necessidade" rows="3"></textarea></label>
+            <label>Renda familiar<br>
+              <select name="ben_renda" id="edit_ben_renda">
+                <option value="">Selecione a faixa de renda</option>
+                <option value="Sem renda">Sem renda</option>
+                <option value="Até 1/2 salário mínimo (até R$&nbsp;759)">Até 1/2 salário mínimo &mdash; Classe E</option>
+                <option value="De 1/2 a 1 salário mínimo (R$&nbsp;759 a R$&nbsp;1.518)">De 1/2 a 1 salário mínimo &mdash; Classe E</option>
+                <option value="De 1 a 2 salários mínimos (R$&nbsp;1.518 a R$&nbsp;3.036)">De 1 a 2 salários mínimos &mdash; Classe E</option>
+                <option value="De 2 a 4 salários mínimos (R$&nbsp;3.036 a R$&nbsp;6.072)">De 2 a 4 salários mínimos &mdash; Classe D</option>
+                <option value="De 4 a 10 salários mínimos (R$&nbsp;6.072 a R$&nbsp;15.180)">De 4 a 10 salários mínimos &mdash; Classe C</option>
+                <option value="Acima de 10 salários mínimos (acima de R$&nbsp;15.180)">Acima de 10 salários mínimos &mdash; Classes A/B</option>
+              </select>
+            </label>
+            <label>Composição familiar<br>
+              <select name="ben_familiares" id="edit_ben_familiares">
+                <option value="">Selecione a composição familiar</option>
+                <optgroup label="1 pessoa">
+                  <option>1 pessoa (1 adulto)</option>
+                  <option>1 pessoa (1 idoso)</option>
+                </optgroup>
+                <optgroup label="2 pessoas">
+                  <option>2 pessoas (2 adultos)</option>
+                  <option>2 pessoas (1 adulto e 1 criança/adolescente)</option>
+                  <option>2 pessoas (1 adulto e 1 idoso)</option>
+                  <option>2 pessoas (1 idoso e 1 criança/adolescente)</option>
+                  <option>2 pessoas (2 idosos)</option>
+                </optgroup>
+                <optgroup label="3 pessoas">
+                  <option>3 pessoas (3 adultos)</option>
+                  <option>3 pessoas (2 adultos e 1 criança/adolescente)</option>
+                  <option>3 pessoas (2 adultos e 1 idoso)</option>
+                  <option>3 pessoas (1 adulto e 2 crianças/adolescentes)</option>
+                  <option>3 pessoas (1 adulto e 1 criança/adolescente e 1 idoso)</option>
+                  <option>3 pessoas (1 adulto e 2 idosos)</option>
+                  <option>3 pessoas (2 idosos e 1 criança/adolescente)</option>
+                </optgroup>
+                <optgroup label="4 pessoas">
+                  <option>4 pessoas (4 adultos)</option>
+                  <option>4 pessoas (3 adultos e 1 criança/adolescente)</option>
+                  <option>4 pessoas (3 adultos e 1 idoso)</option>
+                  <option>4 pessoas (2 adultos e 2 crianças/adolescentes)</option>
+                  <option>4 pessoas (2 adultos e 1 criança/adolescente e 1 idoso)</option>
+                  <option>4 pessoas (2 adultos e 2 idosos)</option>
+                  <option>4 pessoas (1 adulto e 3 crianças/adolescentes)</option>
+                  <option>4 pessoas (1 adulto e 2 crianças/adolescentes e 1 idoso)</option>
+                  <option>4 pessoas (2 idosos e 2 crianças/adolescentes)</option>
+                </optgroup>
+                <optgroup label="5 pessoas">
+                  <option>5 pessoas (5 adultos)</option>
+                  <option>5 pessoas (4 adultos e 1 criança/adolescente)</option>
+                  <option>5 pessoas (3 adultos e 2 crianças/adolescentes)</option>
+                  <option>5 pessoas (3 adultos e 1 criança/adolescente e 1 idoso)</option>
+                  <option>5 pessoas (2 adultos e 3 crianças/adolescentes)</option>
+                  <option>5 pessoas (2 adultos e 2 crianças/adolescentes e 1 idoso)</option>
+                  <option>5 pessoas (2 adultos e 1 criança/adolescente e 2 idosos)</option>
+                  <option>5 pessoas (1 adulto e 4 crianças/adolescentes)</option>
+                  <option>5 pessoas (1 adulto e 3 crianças/adolescentes e 1 idoso)</option>
+                  <option>5 pessoas (2 idosos e 3 crianças/adolescentes)</option>
+                </optgroup>
+                <optgroup label="6 pessoas">
+                  <option>6 pessoas (6 adultos)</option>
+                  <option>6 pessoas (5 adultos e 1 criança/adolescente)</option>
+                  <option>6 pessoas (4 adultos e 2 crianças/adolescentes)</option>
+                  <option>6 pessoas (4 adultos e 1 criança/adolescente e 1 idoso)</option>
+                  <option>6 pessoas (3 adultos e 3 crianças/adolescentes)</option>
+                  <option>6 pessoas (3 adultos e 2 crianças/adolescentes e 1 idoso)</option>
+                  <option>6 pessoas (3 adultos e 1 criança/adolescente e 2 idosos)</option>
+                  <option>6 pessoas (2 adultos e 4 crianças/adolescentes)</option>
+                  <option>6 pessoas (2 adultos e 3 crianças/adolescentes e 1 idoso)</option>
+                  <option>6 pessoas (2 adultos e 2 crianças/adolescentes e 2 idosos)</option>
+                  <option>6 pessoas (1 adulto e 5 crianças/adolescentes)</option>
+                  <option>6 pessoas (2 idosos e 4 crianças/adolescentes)</option>
+                </optgroup>
+                <optgroup label="Outros">
+                  <option value="Outros (descreva em Observações)">Outros — descreva em Observações</option>
+                </optgroup>
+              </select>
+            </label>
+            <label style="grid-column: 1 / -1">Observações<br><textarea name="observacoes" id="edit_ben_observacoes" rows="2"></textarea></label>
+            <label><input type="checkbox" name="termo" id="edit_ben_termo"> Autorizou cadastro</label>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-enviar" id="saveBeneficiarioEdit">Salvar alterações</button>
+            <button type="button" class="btn-enviar btn-secondary" id="cancelBeneficiarioEdit">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Modal de detalhes -->
+    <section id="beneficiarioDetailsModal" class="member-modal" hidden aria-hidden="true">
+      <div class="member-modal-overlay" data-close-ben-details-modal></div>
+      <div class="member-modal-content" role="dialog" aria-modal="true" aria-labelledby="beneficiarioDetailsTitle">
+        <div class="member-modal-header">
+          <h2 id="beneficiarioDetailsTitle">Ficha Completa do Beneficiário</h2>
+          <button type="button" class="modal-close" id="closeBeneficiarioDetailsModal" aria-label="Fechar">×</button>
+        </div>
+        <div id="beneficiarioDetailsContent" class="member-details-grid"></div>
+        <div class="form-actions">
+          <button type="button" class="btn-enviar btn-secondary" id="closeBeneficiarioDetailsFooter">Fechar</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© Instituto Belém - CNPJ 60.690.343/0001-57</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>

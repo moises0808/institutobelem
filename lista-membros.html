@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Instituto Belém — Lista de Membros</title>
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="style.css?v=20260706e">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-wrap"><img src="assets/logo.png" alt="Instituto Belém" class="logo"></div>
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Início</a>
+      <a href="principal.html" class="nav-link">Principal</a>
+      <a href="acoes.html" class="nav-link">Ações</a>
+      <a href="seja-membro.html" class="nav-link">Seja Membro</a>
+      <a href="area-restrita.html" class="nav-link active">Área Restrita</a>
+    </nav>
+  </header>
+
+  <main class="container restricted-dashboard" data-members-page>
+    <div class="dashboard-hero">
+      <p class="eyebrow">Painel interno</p>
+      <h1>Lista de Membros</h1>
+      <p>Visualização dos cadastros recebidos pela inscrição de voluntários.</p>
+    </div>
+
+    <div class="dashboard-actions">
+      <a class="btn-enviar" href="painel-restrito.html">Voltar ao painel</a>
+      <button class="btn-enviar btn-secondary" id="btnAtualizarMembros" type="button">Atualizar lista</button>
+      <button class="btn-enviar btn-secondary" id="logoutRestrito" type="button">Sair</button>
+    </div>
+
+    <div id="membersStatus" class="status"></div>
+    <div id="membersCount" class="members-count"></div>
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Foto</th>
+            <th>Data</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Telefone</th>
+            <th>CPF</th>
+            <th>Cidade/UF</th>
+            <th>Área</th>
+            <th>Dias</th>
+            <th>Frequência</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="membersTableBody">
+          <tr><td colspan="11">Carregando membros...</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <section id="memberEditModal" class="member-modal" hidden aria-hidden="true">
+      <div class="member-modal-overlay" data-close-modal></div>
+      <div class="member-modal-content" role="dialog" aria-modal="true" aria-labelledby="editMemberTitle">
+        <div class="member-modal-header">
+          <h2 id="editMemberTitle">Editar Membro</h2>
+          <button type="button" class="modal-close" id="closeMemberModal" aria-label="Fechar">×</button>
+        </div>
+        <form id="memberEditForm" class="member-edit-form" novalidate>
+          <input type="hidden" name="id" id="edit_id">
+          <div class="form-grid">
+            <label>Nome completo<br><input type="text" name="vol_nome" id="edit_vol_nome" required></label>
+            <label>E-mail<br><input type="email" name="vol_email" id="edit_vol_email" required></label>
+            <label>Data de nascimento<br><input type="date" name="vol_data_nasc" id="edit_vol_data_nasc"></label>
+            <label>CPF<br><input type="text" name="vol_cpf" id="edit_vol_cpf"></label>
+            <label>RG<br><input type="text" name="vol_rg" id="edit_vol_rg"></label>
+            <label>Telefone principal<br><input type="tel" name="vol_tel_principal" id="edit_vol_tel_principal" required></label>
+            <label>Telefone alternativo<br><input type="tel" name="vol_tel_alternativo" id="edit_vol_tel_alternativo"></label>
+            <label>WhatsApp<br><input type="tel" name="vol_whatsapp" id="edit_vol_whatsapp"></label>
+            <label>CEP<br><input type="text" name="vol_cep" id="edit_vol_cep"></label>
+            <label>Rua<br><input type="text" name="vol_rua" id="edit_vol_rua"></label>
+            <label>Número<br><input type="text" name="vol_numero" id="edit_vol_numero"></label>
+            <label>Bairro<br><input type="text" name="vol_bairro" id="edit_vol_bairro"></label>
+            <label>Cidade<br><input type="text" name="vol_cidade" id="edit_vol_cidade"></label>
+            <label>Estado<br><input type="text" name="vol_estado" id="edit_vol_estado"></label>
+            <label>Tipo de membro<br><input type="text" name="tipo_membro" id="edit_tipo_membro"></label>
+            <label>Área<br><input type="text" name="area" id="edit_area"></label>
+            <label>Área (outro)<br><input type="text" name="area_outro" id="edit_area_outro"></label>
+            <label>Dias disponíveis<br><input type="text" name="dias_disponiveis" id="edit_dias_disponiveis"></label>
+            <label>Horários disponíveis<br><input type="text" name="horarios_disponiveis" id="edit_horarios_disponiveis"></label>
+            <label>Frequência<br><input type="text" name="frequencia_vol" id="edit_frequencia_vol"></label>
+            <label>Formação<br><input type="text" name="formacao" id="edit_formacao"></label>
+            <label>Cursos<br><textarea name="cursos" id="edit_cursos" rows="2"></textarea></label>
+            <label>Experiência<br><textarea name="experiencia" id="edit_experiencia" rows="2"></textarea></label>
+            <label>Habilidades<br><input type="text" name="habilidades" id="edit_habilidades"></label>
+            <label>Data da última atuação<br><input type="date" name="data_entrada" id="edit_data_entrada"></label>
+            <label>Projetos<br><input type="text" name="projetos" id="edit_projetos"></label>
+            <label>Participações anteriores<br><textarea name="part_anteriores" id="edit_part_anteriores" rows="2"></textarea></label>
+            <label>Avaliação interna<br><input type="text" name="avaliacao" id="edit_avaliacao"></label>
+            <label style="grid-column: 1 / -1">Foto<br>
+              <div style="display:flex; align-items:center; gap:16px; flex-wrap:wrap; margin-top:4px;">
+                <img id="edit_vol_foto_preview" src="" alt="Foto atual do membro" style="display:none; width:80px; height:80px; border-radius:6px; object-fit:cover; border:1px solid #ccc; cursor:zoom-in;" title="Clique para ampliar">
+                <div>
+                  <div style="margin-bottom:6px;"><input type="file" name="vol_foto_file" id="edit_vol_foto_file" accept="image/*"></div>
+                  <input type="text" id="edit_vol_foto_atual" readonly style="font-size:0.82rem; color:#64748b; width:100%; max-width:280px;">
+                </div>
+              </div>
+            </label>
+            <input type="hidden" name="vol_foto_nome" id="edit_vol_foto_nome">
+            <input type="hidden" name="vol_foto_url" id="edit_vol_foto_url">
+            <label><input type="checkbox" name="termo_vol" id="edit_termo_vol"> Termo de voluntariado</label>
+            <label><input type="checkbox" name="codigo_conduta" id="edit_codigo_conduta"> Código de conduta</label>
+            <label><input type="checkbox" name="confidencialidade" id="edit_confidencialidade"> Confidencialidade</label>
+            <label><input type="checkbox" name="uso_imagem" id="edit_uso_imagem"> Uso de imagem</label>
+          </div>
+          <div class="form-actions">
+            <button type="submit" class="btn-enviar" id="saveMemberEdit">Salvar alterações</button>
+            <button type="button" class="btn-enviar btn-secondary" id="cancelMemberEdit">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <section id="memberDetailsModal" class="member-modal" hidden aria-hidden="true">
+      <div class="member-modal-overlay" data-close-details-modal></div>
+      <div class="member-modal-content" role="dialog" aria-modal="true" aria-labelledby="memberDetailsTitle">
+        <div class="member-modal-header">
+          <h2 id="memberDetailsTitle">Ficha Completa do Membro</h2>
+          <button type="button" class="modal-close" id="closeDetailsModal" aria-label="Fechar">×</button>
+        </div>
+        <div id="memberDetailsContent" class="member-details-grid"></div>
+        <div class="form-actions">
+          <button type="button" class="btn-enviar btn-secondary" id="closeDetailsModalFooter">Fechar</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><p>© Instituto Belém - CNPJ 60.690.343/0001-57</p></footer>
+  <script src="script.js?v=20260706f"></script>
+</body>
+</html>

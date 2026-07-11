@@ -186,6 +186,123 @@ input[type="checkbox"] {
   background-color: #004494;
 }
 
+.btn-secondary {
+  background-color: var(--secondary-color);
+  margin-left: 12px;
+}
+
+.btn-secondary:hover {
+  background-color: #545b62;
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.form-actions .btn-enviar {
+  min-width: 260px;
+  height: 52px;
+  padding: 0 30px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  line-height: 1;
+  appearance: none;
+}
+
+.form-actions .btn-secondary {
+  margin-left: 0;
+}
+
+a.btn-enviar {
+  display: inline-block;
+  text-decoration: none;
+}
+
+.login-form {
+  max-width: 420px;
+  margin: 2rem auto 1rem;
+  text-align: left;
+}
+
+.restricted-note {
+  max-width: 540px;
+  margin: 0 auto 1rem;
+  color: #555;
+}
+
+.beneficiario-form {
+  max-width: 900px;
+  margin: 1.5rem auto 0;
+  text-align: left;
+}
+
+.restricted-dashboard {
+  text-align: left;
+}
+
+.dashboard-hero {
+  background: linear-gradient(135deg, #0d3b66, #1f6f8b);
+  color: #fff;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-hero h1 {
+  margin: 0.25rem 0 0.5rem;
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  opacity: 0.85;
+  margin: 0;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.dashboard-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 1.25rem;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.dashboard-card h2 {
+  margin-top: 0;
+  color: var(--primary-color);
+}
+
+.dashboard-actions {
+  margin-top: 1.5rem;
+}
+
+.members-count {
+  margin: 1rem 0 0.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+@media (max-width: 640px) {
+  .dashboard-actions .btn-enviar {
+    display: block;
+    width: 100%;
+    margin: 0 0 0.75rem;
+  }
+}
+
 .table-container {
   overflow-x: auto;
   margin-top: 2rem;
@@ -214,6 +331,139 @@ th {
 
 tr:hover {
   background-color: #f9f9f9;
+}
+
+.btn-small {
+  padding: 8px 12px;
+  font-size: 0.85rem;
+  border-radius: 4px;
+}
+
+.member-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.member-actions .btn-enviar.btn-small {
+  width: 118px;
+  min-width: 118px;
+  max-width: 118px;
+  height: 34px;
+  min-height: 34px;
+  max-height: 34px;
+  padding: 0 8px !important;
+  font-size: 0.76rem !important;
+  line-height: 1 !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.member-details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+  text-align: left;
+}
+
+.member-detail-item {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+.member-detail-item strong {
+  display: block;
+  color: #334155;
+  font-size: 0.8rem;
+  margin-bottom: 4px;
+}
+
+.member-detail-item span {
+  color: #0f172a;
+  font-size: 0.92rem;
+  word-break: break-word;
+}
+
+.member-avatar {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #0d3b66;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.member-photo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: inline-block;
+  border: 1px solid #d1d5db;
+}
+
+.member-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: grid;
+  place-items: center;
+}
+
+.member-modal[hidden] {
+  display: none;
+}
+
+.member-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+}
+
+.member-modal-content {
+  position: relative;
+  width: min(760px, calc(100vw - 32px));
+  max-height: calc(100vh - 40px);
+  overflow: auto;
+  background: var(--white);
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.24);
+}
+
+.member-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.member-modal-header h2 {
+  margin: 0;
+  color: var(--primary-color);
+}
+
+.modal-close {
+  background: transparent;
+  border: 0;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #334155;
+}
+
+.member-edit-form {
+  text-align: left;
 }
 
 .site-footer {

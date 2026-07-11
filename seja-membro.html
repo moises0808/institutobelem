@@ -23,26 +23,29 @@
     <h1>Associe-se ao Instituto Belém</h1>
 
     <div id="voluntarioSection">
-      <form id="formVoluntario" enctype="multipart/form-data">
+      <form id="formVoluntario" enctype="multipart/form-data" novalidate>
         <fieldset>
           <legend>1. Identificação Básica</legend>
           <div class="form-grid">
             <label>Nome completo<br><input type="text" name="vol_nome" required></label>
-            <label>E-mail<br><input type="email" name="vol_email" required></label>
+            <label>E-mail<br><input type="email" name="vol_email" required autocomplete="email"></label>
             <label>Data de nascimento<br><input type="date" name="vol_data_nasc" required></label>
-            <label>CPF<br><input type="text" name="vol_cpf" placeholder="000.000.000-00" required></label>
+            <label>CPF<br><input type="text" name="vol_cpf" placeholder="000.000.000-00" required maxlength="14" inputmode="numeric"></label>
             <label>RG<br><input type="text" name="vol_rg" required></label>
-            <label>Telefone Principal<br><input type="tel" name="vol_tel_principal" required></label>
-            <label>Telefone Alternativo<br><input type="tel" name="vol_tel_alternativo"></label>
-            <label>WhatsApp<br><input type="tel" name="vol_whatsapp"></label>
-            <label>Foto (opcional)<br><input type="file" name="vol_foto" accept="image/*"></label>
+            <label>Telefone Principal<br><input type="tel" name="vol_tel_principal" required maxlength="15" inputmode="numeric" placeholder="(00) 00000-0000"></label>
+            <label>Telefone Alternativo<br><input type="tel" name="vol_tel_alternativo" maxlength="15" inputmode="numeric" placeholder="(00) 00000-0000"></label>
+            <label>WhatsApp<br><input type="tel" name="vol_whatsapp" maxlength="15" inputmode="numeric" placeholder="(00) 00000-0000"></label>
+            <label>Foto (opcional)<br>
+              <input type="file" name="vol_foto" id="vol_foto_input" accept="image/*">
+              <img id="vol_foto_preview" src="" alt="Prévia da foto" style="display:none; max-width:120px; max-height:120px; border-radius:6px; margin-top:6px; object-fit:cover; border:1px solid #ccc;">
+            </label>
           </div>
         </fieldset>
 
         <fieldset>
           <legend>2. Endereço</legend>
           <div class="form-grid">
-            <label>CEP<br><input type="text" id="vol_cep" name="vol_cep" placeholder="00000-000" required></label>
+            <label>CEP<br><input type="text" id="vol_cep" name="vol_cep" placeholder="00000-000" required maxlength="9" inputmode="numeric"></label>
             <label>Rua<br><input type="text" id="vol_rua" name="vol_rua" required></label>
             <label>Número<br><input type="text" name="vol_numero" required></label>
             <label>Bairro<br><input type="text" id="vol_bairro" name="vol_bairro" required></label>
@@ -57,8 +60,6 @@
             <label>Tipo de membro<br>
               <select name="tipo_membro" required>
                 <option value="voluntario">Voluntário</option>
-                <option value="funcionario">Funcionário</option>
-                <option value="coordenador">Coordenador</option>
                 <option value="parceiro">Parceiro</option>
               </select>
             </label>
@@ -77,7 +78,16 @@
         <fieldset>
           <legend>4. Disponibilidade (ESSENCIAL)</legend>
           <div class="form-grid">
-            <label>Dias da semana disponíveis<br><input type="text" name="dias_disponiveis" placeholder="Ex: Seg, Qua, Sex"></label>
+            <div class="checkbox-group">
+              <p><strong>Dias da semana disponíveis:</strong></p>
+              <label><input type="checkbox" name="dias_disponiveis" value="Seg"> Seg</label>
+              <label><input type="checkbox" name="dias_disponiveis" value="Ter"> Ter</label>
+              <label><input type="checkbox" name="dias_disponiveis" value="Qua"> Qua</label>
+              <label><input type="checkbox" name="dias_disponiveis" value="Qui"> Qui</label>
+              <label><input type="checkbox" name="dias_disponiveis" value="Sex"> Sex</label>
+              <label><input type="checkbox" name="dias_disponiveis" value="Sab"> Sáb</label>
+              <label><input type="checkbox" name="dias_disponiveis" value="Dom"> Dom</label>
+            </div>
             <label>Horários disponíveis<br><input type="text" name="horarios_disponiveis" placeholder="Ex: 08:00 às 12:00"></label>
           </div>
           <div class="checkbox-group">
@@ -97,29 +107,12 @@
         </fieldset>
 
         <fieldset>
-          <legend>6. Responsabilidades e Permissões</legend>
-          <div class="radio-group-vertical">
-            <p>Pode acessar dados de beneficiários?</p>
-            <label><input type="radio" name="perm_dados" value="sim"> Sim</label>
-            <label><input type="radio" name="perm_dados" value="nao"> Não</label>
-            
-            <p style="margin-top:10px;">Pode aprovar ajuda?</p>
-            <label><input type="radio" name="perm_ajuda" value="sim"> Sim</label>
-            <label><input type="radio" name="perm_ajuda" value="nao"> Não</label>
-            
-            <p style="margin-top:10px;">Pode gerenciar outros membros?</p>
-            <label><input type="radio" name="perm_gerencia" value="sim"> Sim</label>
-            <label><input type="radio" name="perm_gerencia" value="nao"> Não</label>
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend>7. Histórico e Atuação</legend>
+          <legend>6. Histórico de Atuação (Opcional)</legend>
           <div class="form-grid">
-            <label>Data de entrada<br><input type="date" name="data_entrada"></label>
-            <label>Projetos que participa<br><input type="text" name="projetos"></label>
+            <label>Data da última atuação no Instituto como parceiro (opcional)<br><input type="date" name="data_entrada"></label>
+            <label>Projetos em que atuou na última participação (opcional)<br><input type="text" name="projetos"></label>
           </div>
-          <label>Participações anteriores<br><textarea name="part_anteriores"></textarea></label>
+          <label>Participações anteriores como parceiro (opcional)<br><textarea name="part_anteriores"></textarea></label>
           <label>Avaliação interna (opcional)<br><input type="text" name="avaliacao"></label>
         </fieldset>
 
@@ -133,7 +126,7 @@
         </fieldset>
 
         <fieldset>
-          <legend>9. Termos e Responsabilidade</legend>
+          <legend>7. Termos e Responsabilidade</legend>
           <div class="checkbox-group">
             <label><input type="checkbox" name="termo_vol" required> Termo de voluntariado</label><br>
             <label><input type="checkbox" name="codigo_conduta" required> Código de conduta</label><br>
@@ -145,14 +138,406 @@
           </p>
         </fieldset>
 
-        <button type="submit" class="btn-enviar">Enviar inscrição de Voluntário</button>
+        <button type="submit" class="btn-enviar" id="btnEnviarVoluntario">Enviar inscrição de Voluntário</button>
       </form>
       <div id="voluntarioStatus" class="status"></div>
     </div>
   </main>
 
   <footer class="site-footer"><p>© Instituto Belém - CNPJ 60.690.343/0001-57</p></footer>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="script.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const form = document.getElementById('formVoluntario');
+      const status = document.getElementById('voluntarioStatus');
+      const cepInput = document.getElementById('vol_cep');
+      const button = document.getElementById('btnEnviarVoluntario');
+      if (!form || !status) return;
+
+      // Prévia da foto
+      const fotoInput = document.getElementById('vol_foto_input');
+      const fotoPreview = document.getElementById('vol_foto_preview');
+      if (fotoInput && fotoPreview) {
+        fotoInput.addEventListener('change', function () {
+          const file = fotoInput.files[0];
+          if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+              fotoPreview.src = e.target.result;
+              fotoPreview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+          } else {
+            fotoPreview.src = '';
+            fotoPreview.style.display = 'none';
+          }
+        });
+      }
+
+      const formatarCEP = (valor) => {
+        const digits = String(valor || '').replace(/\D/g, '').slice(0, 8);
+        return digits.length <= 5 ? digits : `${digits.slice(0, 5)}-${digits.slice(5)}`;
+      };
+
+      const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      const isValidCPF = (cpf) => {
+        const digits = String(cpf || '').replace(/\D/g, '');
+        if (digits.length !== 11 || /^(\d)\1{10}$/.test(digits)) return false;
+        const valores = digits.split('').map(Number);
+        const calc = (size) => {
+          let soma = 0;
+          for (let i = 0; i < size; i += 1) {
+            soma += valores[i] * ((size + 1) - i);
+          }
+          const resto = (soma * 10) % 11;
+          return resto === 10 ? 0 : resto;
+        };
+        return calc(9) === valores[9] && calc(10) === valores[10];
+      };
+      const isValidPhone = (phone) => {
+        const digits = String(phone || '').replace(/\D/g, '');
+        return digits.length === 11;
+      };
+
+      const formatPhone = (value) => {
+        const digits = String(value || '').replace(/\D/g, '').slice(0, 11);
+        if (digits.length <= 2) return digits;
+        if (digits.length <= 7) return digits.replace(/(\d{2})(\d{0,5})/, '($1) $2').trim();
+        return digits.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3').trim();
+      };
+
+      const setFieldError = (field, message) => {
+        if (!field) return;
+        field.setCustomValidity(message || '');
+        field.setAttribute('aria-invalid', message ? 'true' : 'false');
+        field.style.borderColor = message ? '#d9534f' : '';
+        field.style.boxShadow = message ? '0 0 0 2px rgba(217,83,79,0.15)' : '';
+        if (field.type === 'checkbox' || field.type === 'radio') {
+          field.style.outline = message ? '2px solid #d9534f' : '';
+          field.style.outlineOffset = message ? '2px' : '';
+        }
+      };
+
+      const validateRequiredText = (field, message) => {
+        if (!field) return false;
+        const value = String(field.value || '').trim();
+        const error = value ? '' : message;
+        setFieldError(field, error);
+        return !error;
+      };
+
+      const validateFullNameField = (field) => {
+        if (!field) return false;
+        const value = String(field.value || '').trim().replace(/\s+/g, ' ');
+        const words = value ? value.split(' ') : [];
+        const error = words.length >= 2 ? '' : 'Informe nome e sobrenome.';
+        setFieldError(field, error);
+        return !error;
+      };
+
+      const validateEmailField = (field) => {
+        if (!field) return false;
+        const value = String(field.value || '').trim();
+        const error = !value ? 'Informe um e-mail válido.' : (!isValidEmail(value) ? 'Informe um e-mail válido.' : '');
+        setFieldError(field, error);
+        return !error;
+      };
+
+      const validateCpfField = (field) => {
+        if (!field) return false;
+        const value = String(field.value || '').trim();
+        const digits = value.replace(/\D/g, '');
+        let error = '';
+        if (!digits) error = 'Informe um CPF válido.';
+        else if (digits.length !== 11) error = 'CPF incompleto.';
+        else if (!isValidCPF(digits)) error = 'CPF inválido.';
+        setFieldError(field, error);
+        return !error;
+      };
+
+      const validatePhoneField = (field, label, required) => {
+        if (!field) return false;
+        const value = String(field.value || '').trim();
+        const digits = value.replace(/\D/g, '');
+        const expectedFormat = /^\(\d{2}\)\s\d{5}-\d{4}$/;
+        let error = '';
+        if (!value) {
+          error = required ? `Informe um ${label.toLowerCase()} no formato (00) 00000-0000.` : '';
+        } else if (!isValidPhone(value)) {
+          error = `Informe um ${label.toLowerCase()} com 11 dígitos.`;
+        } else if (!expectedFormat.test(value)) {
+          error = `Use o formato (00) 00000-0000.`;
+        }
+        setFieldError(field, error);
+        return !error;
+      };
+
+      const validateCepField = (field) => {
+        if (!field) return false;
+        const digits = String(field.value || '').replace(/\D/g, '');
+        const error = digits.length === 8 ? '' : 'Informe um CEP válido com 8 dígitos.';
+        setFieldError(field, error);
+        return !error;
+      };
+
+      const preencherCampos = (data) => {
+        const setValue = (id, value) => {
+          const campo = document.getElementById(id);
+          if (campo) campo.value = value || '';
+        };
+
+        setValue('vol_rua', data.logradouro || '');
+        setValue('vol_bairro', data.bairro || '');
+        setValue('vol_cidade', data.localidade || '');
+        setValue('vol_estado', data.uf || '');
+      };
+
+      const buscarCEP = () => {
+        const cep = String(cepInput.value || '').replace(/\D/g, '');
+        if (cep.length !== 8) return;
+
+        fetch(`https://viacep.com.br/ws/${cep}/json/`, { cache: 'no-store' })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.erro) {
+              status.innerHTML = "<p style='color: red;'>CEP não encontrado.</p>";
+              cepInput.value = '';
+              return;
+            }
+            preencherCampos(data);
+          })
+          .catch((err) => {
+            console.error('Erro ao buscar CEP:', err);
+            status.innerHTML = "<p style='color: red;'>Não foi possível buscar o endereço pelo CEP.</p>";
+          });
+      };
+
+      const toDataUrl = (file) => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result || ''));
+        reader.onerror = () => reject(new Error('Falha ao ler a foto selecionada.'));
+        reader.readAsDataURL(file);
+      });
+
+      const buildPayload = async () => {
+        const data = new FormData(form);
+        const payload = {};
+        const allowed = [
+          'vol_nome', 'vol_email', 'vol_data_nasc', 'vol_cpf', 'vol_rg',
+          'vol_tel_principal', 'vol_tel_alternativo', 'vol_whatsapp',
+          'vol_cep', 'vol_rua', 'vol_numero', 'vol_bairro', 'vol_cidade', 'vol_estado',
+          'vol_foto_nome', 'vol_foto_url',
+          'tipo_membro', 'area_outro', 'horarios_disponiveis', 'frequencia_vol',
+          'formacao', 'cursos', 'experiencia', 'habilidades', 'data_entrada', 'projetos', 'part_anteriores', 'avaliacao',
+          'termo_vol', 'codigo_conduta', 'confidencialidade', 'uso_imagem'
+        ];
+        data.forEach((value, key) => {
+          if (!allowed.includes(key)) return;
+          if (value === 'on') payload[key] = true;
+          else if (value === '') payload[key] = null;
+          else payload[key] = String(value);
+        });
+
+        // Campos com múltiplas seleções (checkbox)
+        const areas = data.getAll('area').filter(Boolean).map(String);
+        const dias = data.getAll('dias_disponiveis').filter(Boolean).map(String);
+        payload.area = areas.length ? areas.join(', ') : null;
+        payload.dias_disponiveis = dias.length ? dias.join(', ') : null;
+
+        // Compatibilidade com colunas antigas já existentes no banco
+        payload.nome = payload.vol_nome || null;
+        payload.email = payload.vol_email || null;
+        payload.telefone = payload.vol_tel_principal || null;
+        payload.disponibilidade = payload.horarios_disponiveis || null;
+
+        const fotoFile = data.get('vol_foto');
+        if (fotoFile instanceof File && fotoFile.name) {
+          payload.vol_foto_nome = fotoFile.name;
+          payload.vol_foto_url = await toDataUrl(fotoFile);
+        }
+
+        return payload;
+      };
+
+      const validateForm = () => {
+        const nomeField = form.querySelector('[name="vol_nome"]');
+        const emailField = form.querySelector('[name="vol_email"]');
+        const dataField = form.querySelector('[name="vol_data_nasc"]');
+        const cpfField = form.querySelector('[name="vol_cpf"]');
+        const rgField = form.querySelector('[name="vol_rg"]');
+        const telefoneField = form.querySelector('[name="vol_tel_principal"]');
+        const telefoneAlternativoField = form.querySelector('[name="vol_tel_alternativo"]');
+        const whatsappField = form.querySelector('[name="vol_whatsapp"]');
+        const cepField = form.querySelector('[name="vol_cep"]');
+        const ruaField = form.querySelector('[name="vol_rua"]');
+        const numeroField = form.querySelector('[name="vol_numero"]');
+        const bairroField = form.querySelector('[name="vol_bairro"]');
+        const cidadeField = form.querySelector('[name="vol_cidade"]');
+        const estadoField = form.querySelector('[name="vol_estado"]');
+        const horariosField = form.querySelector('[name="horarios_disponiveis"]');
+        const termoField = form.querySelector('[name="termo_vol"]');
+        const codigoCondutaField = form.querySelector('[name="codigo_conduta"]');
+        const confidencialidadeField = form.querySelector('[name="confidencialidade"]');
+        const email = emailField.value.trim();
+        const cpf = cpfField.value.trim();
+        const telefone = telefoneField.value.trim();
+        const cep = cepField.value.replace(/\D/g, '');
+        const dias = form.querySelectorAll('[name="dias_disponiveis"]:checked').length;
+        const horarios = horariosField.value.trim();
+
+        const failField = (field, message) => {
+          if (!field) return message;
+          field.reportValidity();
+          field.focus();
+          return message;
+        };
+
+        if (!validateFullNameField(nomeField)) return failField(nomeField, 'O campo Nome completo deve conter pelo menos duas palavras.');
+        if (!validateEmailField(emailField)) return failField(emailField, 'Preencha o campo E-mail com um formato válido.');
+        if (!validateRequiredText(dataField, 'Informe a data de nascimento.')) return failField(dataField, 'Preencha o campo Data de nascimento.');
+        if (!validateCpfField(cpfField)) return failField(cpfField, 'Preencha o campo CPF com um formato válido.');
+        if (!validateRequiredText(rgField, 'Informe o RG.')) return failField(rgField, 'Preencha o campo RG.');
+        if (!validatePhoneField(telefoneField, 'telefone principal', true)) return failField(telefoneField, 'Preencha o campo Telefone principal com um formato válido.');
+        if (!validatePhoneField(telefoneAlternativoField, 'telefone alternativo', false)) return failField(telefoneAlternativoField, 'Telefone alternativo inválido. Use 10 ou 11 dígitos ou deixe em branco.');
+        if (!validatePhoneField(whatsappField, 'WhatsApp', false)) return failField(whatsappField, 'WhatsApp inválido. Use 10 ou 11 dígitos ou deixe em branco.');
+        if (!validateCepField(cepField)) return failField(cepField, 'Preencha o campo CEP com 8 dígitos.');
+        if (!validateRequiredText(ruaField, 'Preencha a rua.')) return failField(ruaField, 'Preencha o campo Rua.');
+        if (!validateRequiredText(numeroField, 'Preencha o número.')) return failField(numeroField, 'Preencha o campo Número.');
+        if (!validateRequiredText(bairroField, 'Preencha o bairro.')) return failField(bairroField, 'Preencha o campo Bairro.');
+        if (!validateRequiredText(cidadeField, 'Preencha a cidade.')) return failField(cidadeField, 'Preencha o campo Cidade.');
+        if (!validateRequiredText(estadoField, 'Preencha o estado.')) return failField(estadoField, 'Preencha o campo Estado.');
+        if (!validateRequiredText(horariosField, 'Preencha o horário disponível.')) return failField(horariosField, 'Preencha o campo Horários disponíveis.');
+
+        if (!dias) {
+          const firstDia = form.querySelector('[name="dias_disponiveis"]');
+          setFieldError(firstDia, 'Selecione pelo menos um dia disponível.');
+          return failField(firstDia, 'Selecione pelo menos um dia disponível.');
+        }
+        const firstDia = form.querySelector('[name="dias_disponiveis"]');
+        setFieldError(firstDia, '');
+        if (!termoField.checked) {
+          setFieldError(termoField, 'Aceite o termo de voluntariado.');
+          return failField(termoField, 'Aceite o campo Termo de voluntariado.');
+        }
+        setFieldError(termoField, '');
+        if (!codigoCondutaField.checked) {
+          setFieldError(codigoCondutaField, 'Aceite o código de conduta.');
+          return failField(codigoCondutaField, 'Aceite o campo Código de conduta.');
+        }
+        setFieldError(codigoCondutaField, '');
+        if (!confidencialidadeField.checked) {
+          setFieldError(confidencialidadeField, 'Aceite o termo de confidencialidade.');
+          return failField(confidencialidadeField, 'Aceite o campo Termo de confidencialidade.');
+        }
+        setFieldError(confidencialidadeField, '');
+        return null;
+      };
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const validationError = validateForm();
+        if (validationError) {
+          status.innerHTML = `<p style='color: red;'>${validationError}</p>`;
+          return;
+        }
+
+        status.innerHTML = "<p style='color: blue;'>Enviando para o banco de dados... Aguarde.</p>";
+
+        try {
+          const payload = await buildPayload();
+
+          const tryInsert = async (bodyPayload) => fetch('https://yfwbikxtcjmatrgonnqy.supabase.co/rest/v1/voluntarios?apikey=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlmd2Jpa3h0Y2ptYXRyZ29ubnF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2NTM2NTMsImV4cCI6MjA5NzIyOTY1M30.lDeYy7juOx1m6DcwjBGNyTPJFGBbxFgl_sZ-LxUet4Q', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+              'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlmd2Jpa3h0Y2ptYXRyZ29ubnF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2NTM2NTMsImV4cCI6MjA5NzIyOTY1M30.lDeYy7juOx1m6DcwjBGNyTPJFGBbxFgl_sZ-LxUet4Q',
+              'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlmd2Jpa3h0Y2ptYXRyZ29ubnF5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2NTM2NTMsImV4cCI6MjA5NzIyOTY1M30.lDeYy7juOx1m6DcwjBGNyTPJFGBbxFgl_sZ-LxUet4Q'
+            },
+            body: JSON.stringify([bodyPayload])
+          });
+
+          let response = await tryInsert(payload);
+
+          if (!response.ok) {
+            const detail = await response.text();
+            const missingPhotoColumn = /vol_foto_url|vol_foto_nome|column/i.test(detail);
+            if (missingPhotoColumn && (payload.vol_foto_url || payload.vol_foto_nome)) {
+              const fallbackPayload = { ...payload };
+              delete fallbackPayload.vol_foto_url;
+              delete fallbackPayload.vol_foto_nome;
+              response = await tryInsert(fallbackPayload);
+
+              if (!response.ok) {
+                const fallbackDetail = await response.text();
+                status.innerHTML = `<p style='color: red;'>Erro ao salvar: ${fallbackDetail}</p>`;
+                return;
+              }
+            } else {
+              status.innerHTML = `<p style='color: red;'>Erro ao salvar: ${detail}</p>`;
+              return;
+            }
+          }
+
+          status.innerHTML = "<p style='color: green;'><strong>Sucesso!</strong> Cadastro realizado com sucesso no Instituto Belém.</p>";
+          status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          form.reset();
+        } catch (error) {
+          status.innerHTML = `<p style='color: red;'>Erro ao salvar: ${error?.message || 'Erro desconhecido.'}</p>`;
+        }
+      });
+
+      if (button) {
+        button.addEventListener('click', (event) => {
+          event.preventDefault();
+          form.requestSubmit();
+        });
+      }
+
+      [
+        'vol_nome', 'vol_email', 'vol_data_nasc', 'vol_cpf', 'vol_rg',
+        'vol_tel_principal', 'vol_tel_alternativo', 'vol_whatsapp',
+        'vol_cep', 'vol_rua', 'vol_numero', 'vol_bairro', 'vol_cidade', 'vol_estado', 'horarios_disponiveis'
+      ].forEach((name) => {
+        const field = form.querySelector(`[name="${name}"]`);
+        if (!field) return;
+
+        const validateCurrentField = () => {
+          if (name === 'vol_email') return validateEmailField(field);
+          if (name === 'vol_nome') return validateFullNameField(field);
+          if (name === 'vol_cpf') return validateCpfField(field);
+          if (name === 'vol_tel_principal') return validatePhoneField(field, 'telefone principal', true);
+          if (name === 'vol_tel_alternativo') return validatePhoneField(field, 'telefone alternativo', false);
+          if (name === 'vol_whatsapp') return validatePhoneField(field, 'WhatsApp', false);
+          if (name === 'vol_cep') return validateCepField(field);
+          return validateRequiredText(field, `Preencha ${field.closest('label')?.innerText?.split('\n')[0].toLowerCase() || 'este campo'}.`);
+        };
+
+        field.addEventListener('blur', validateCurrentField);
+        field.addEventListener('input', () => {
+          if (name === 'vol_cpf') {
+            field.value = field.value.replace(/\D/g, '').slice(0, 11).replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+          }
+          if (name === 'vol_tel_principal' || name === 'vol_tel_alternativo' || name === 'vol_whatsapp') {
+            field.value = formatPhone(field.value);
+          }
+          if (name === 'vol_cep') {
+            field.value = formatarCEP(field.value);
+          }
+          validateCurrentField();
+        });
+      });
+
+      if (cepInput) {
+        cepInput.addEventListener('input', function () {
+          this.value = formatarCEP(this.value);
+          if (this.value.replace(/\D/g, '').length === 8) {
+            buscarCEP();
+          }
+        });
+        cepInput.addEventListener('blur', buscarCEP);
+      }
+    });
+  </script>
 </body>
 </html>

@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Instituto Belém — Cadastrar Beneficiário</title>
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="logo-wrap"><img src="assets/logo.png" alt="Instituto Belém" class="logo"></div>
+    <nav class="main-nav">
+      <a href="index.html" class="nav-link">Início</a>
+      <a href="principal.html" class="nav-link">Principal</a>
+      <a href="acoes.html" class="nav-link">Ações</a>
+      <a href="seja-membro.html" class="nav-link">Seja Membro</a>
+      <a href="area-restrita.html" class="nav-link active">Área Restrita</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <h1>Cadastrar Beneficiário</h1>
+    <p class="restricted-note">Preencha os dados abaixo para registrar um beneficiário no sistema.</p>
+
+    <form id="formBeneficiario" class="beneficiario-form" novalidate>
+      <fieldset>
+        <legend>1. Identificação</legend>
+        <div class="form-grid">
+          <label>Nome completo<br><input type="text" name="ben_nome" required></label>
+          <label>E-mail<br><input type="email" name="ben_email" required autocomplete="email"></label>
+          <label>Data de nascimento<br><input type="date" name="ben_data_nasc" required></label>
+          <label>CPF<br><input type="text" name="ben_cpf" required maxlength="14" inputmode="numeric" placeholder="000.000.000-00"></label>
+          <label>Telefone<br><input type="tel" name="ben_telefone" required maxlength="15" inputmode="numeric" placeholder="(00) 00000-0000"></label>
+          <label>Foto (opcional)<br>
+            <input type="file" name="ben_foto" id="ben_foto_input" accept="image/*">
+            <img id="ben_foto_preview" src="" alt="Prévia da foto" style="display:none; max-width:120px; max-height:120px; border-radius:6px; margin-top:6px; object-fit:cover; border:1px solid #ccc;">
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>2. Endereço</legend>
+        <div class="form-grid">
+          <label>CEP<br><input type="text" id="ben_cep" name="ben_cep" required maxlength="9" inputmode="numeric" placeholder="00000-000"></label>
+          <label>Rua<br><input type="text" name="ben_rua" required></label>
+          <label>Número<br><input type="text" name="ben_numero" required></label>
+          <label>Bairro<br><input type="text" name="ben_bairro" required></label>
+          <label>Cidade<br><input type="text" name="ben_cidade" required></label>
+          <label>Estado<br><input type="text" name="ben_estado" required></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>3. Necessidade</legend>
+        <label>Descreva a necessidade<br><textarea name="necessidade" rows="4" required></textarea></label>
+        <div class="form-grid">
+          <label>Renda familiar mensal aproximada<br>
+            <select name="ben_renda" required>
+              <option value="">Selecione a faixa de renda</option>
+              <option value="Sem renda">Sem renda</option>
+              <option value="Até 1/2 salário mínimo (até R$&nbsp;759)">Até 1/2 salário mínimo &mdash; Classe E</option>
+              <option value="De 1/2 a 1 salário mínimo (R$&nbsp;759 a R$&nbsp;1.518)">De 1/2 a 1 salário mínimo &mdash; Classe E</option>
+              <option value="De 1 a 2 salários mínimos (R$&nbsp;1.518 a R$&nbsp;3.036)">De 1 a 2 salários mínimos &mdash; Classe E</option>
+              <option value="De 2 a 4 salários mínimos (R$&nbsp;3.036 a R$&nbsp;6.072)">De 2 a 4 salários mínimos &mdash; Classe D</option>
+              <option value="De 4 a 10 salários mínimos (R$&nbsp;6.072 a R$&nbsp;15.180)">De 4 a 10 salários mínimos &mdash; Classe C</option>
+              <option value="Acima de 10 salários mínimos (acima de R$&nbsp;15.180)">Acima de 10 salários mínimos &mdash; Classes A/B</option>
+            </select>
+          </label>
+          <label>Composição familiar / familiares<br>
+            <select name="ben_familiares" required>
+              <option value="">Selecione a composição familiar</option>
+              <optgroup label="1 pessoa">
+                <option>1 pessoa (1 adulto)</option>
+                <option>1 pessoa (1 idoso)</option>
+              </optgroup>
+              <optgroup label="2 pessoas">
+                <option>2 pessoas (2 adultos)</option>
+                <option>2 pessoas (1 adulto e 1 criança/adolescente)</option>
+                <option>2 pessoas (1 adulto e 1 idoso)</option>
+                <option>2 pessoas (1 idoso e 1 criança/adolescente)</option>
+                <option>2 pessoas (2 idosos)</option>
+              </optgroup>
+              <optgroup label="3 pessoas">
+                <option>3 pessoas (3 adultos)</option>
+                <option>3 pessoas (2 adultos e 1 criança/adolescente)</option>
+                <option>3 pessoas (2 adultos e 1 idoso)</option>
+                <option>3 pessoas (1 adulto e 2 crianças/adolescentes)</option>
+                <option>3 pessoas (1 adulto e 1 criança/adolescente e 1 idoso)</option>
+                <option>3 pessoas (1 adulto e 2 idosos)</option>
+                <option>3 pessoas (2 idosos e 1 criança/adolescente)</option>
+              </optgroup>
+              <optgroup label="4 pessoas">
+                <option>4 pessoas (4 adultos)</option>
+                <option>4 pessoas (3 adultos e 1 criança/adolescente)</option>
+                <option>4 pessoas (3 adultos e 1 idoso)</option>
+                <option>4 pessoas (2 adultos e 2 crianças/adolescentes)</option>
+                <option>4 pessoas (2 adultos e 1 criança/adolescente e 1 idoso)</option>
+                <option>4 pessoas (2 adultos e 2 idosos)</option>
+                <option>4 pessoas (1 adulto e 3 crianças/adolescentes)</option>
+                <option>4 pessoas (1 adulto e 2 crianças/adolescentes e 1 idoso)</option>
+                <option>4 pessoas (2 idosos e 2 crianças/adolescentes)</option>
+              </optgroup>
+              <optgroup label="5 pessoas">
+                <option>5 pessoas (5 adultos)</option>
+                <option>5 pessoas (4 adultos e 1 criança/adolescente)</option>
+                <option>5 pessoas (3 adultos e 2 crianças/adolescentes)</option>
+                <option>5 pessoas (3 adultos e 1 criança/adolescente e 1 idoso)</option>
+                <option>5 pessoas (2 adultos e 3 crianças/adolescentes)</option>
+                <option>5 pessoas (2 adultos e 2 crianças/adolescentes e 1 idoso)</option>
+                <option>5 pessoas (2 adultos e 1 criança/adolescente e 2 idosos)</option>
+                <option>5 pessoas (1 adulto e 4 crianças/adolescentes)</option>
+                <option>5 pessoas (1 adulto e 3 crianças/adolescentes e 1 idoso)</option>
+                <option>5 pessoas (2 idosos e 3 crianças/adolescentes)</option>
+              </optgroup>
+              <optgroup label="6 pessoas">
+                <option>6 pessoas (6 adultos)</option>
+                <option>6 pessoas (5 adultos e 1 criança/adolescente)</option>
+                <option>6 pessoas (4 adultos e 2 crianças/adolescentes)</option>
+                <option>6 pessoas (4 adultos e 1 criança/adolescente e 1 idoso)</option>
+                <option>6 pessoas (3 adultos e 3 crianças/adolescentes)</option>
+                <option>6 pessoas (3 adultos e 2 crianças/adolescentes e 1 idoso)</option>
+                <option>6 pessoas (3 adultos e 1 criança/adolescente e 2 idosos)</option>
+                <option>6 pessoas (2 adultos e 4 crianças/adolescentes)</option>
+                <option>6 pessoas (2 adultos e 3 crianças/adolescentes e 1 idoso)</option>
+                <option>6 pessoas (2 adultos e 2 crianças/adolescentes e 2 idosos)</option>
+                <option>6 pessoas (1 adulto e 5 crianças/adolescentes)</option>
+                <option>6 pessoas (2 idosos e 4 crianças/adolescentes)</option>
+              </optgroup>
+              <optgroup label="Outros">
+                <option value="Outros (descreva em Observações)">Outros — descreva em Observações</option>
+              </optgroup>
+            </select>
+          </label>
+        </div>
+        <label>Observações<br><textarea name="observacoes" rows="4"></textarea></label>
+        <label><input type="checkbox" name="termo" required> Autoriza o cadastro e uso das informações para atendimento.</label>
+      </fieldset>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-enviar" id="btnEnviarBeneficiario">Cadastrar beneficiário</button>
+        <a href="painel-restrito.html" class="btn-enviar btn-secondary">Cancelar</a>
+      </div>
+    </form>
+
+    <div id="membroStatus" class="status"></div>
+  </main>
+
+  <footer class="site-footer"><p>© Instituto Belém - CNPJ 60.690.343/0001-57</p></footer>
+  <script src="script.js?v=20260706c"></script>
+</body>
+</html>
